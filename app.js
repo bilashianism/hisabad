@@ -627,25 +627,37 @@ btnDownloadPdf.addEventListener('click', () => {
    7. bKash payment portal integration
    ========================================================================== */
 
-btnHeaderUpgrade.addEventListener('click', () => openModal('bkash'));
-btnProUpgrade.addEventListener('click', () => openModal('bkash'));
+if (btnHeaderUpgrade) {
+    btnHeaderUpgrade.addEventListener('click', () => openModal('bkash'));
+}
+if (btnProUpgrade) {
+    btnProUpgrade.addEventListener('click', () => openModal('bkash'));
+}
 
 // Plan Card Switch
-tierFreeCard.addEventListener('click', () => selectPlan('free'));
-tierProCard.addEventListener('click', () => selectPlan('pro'));
-tierAgencyCard.addEventListener('click', () => selectPlan('agency'));
+if (tierFreeCard) {
+    tierFreeCard.addEventListener('click', () => selectPlan('free'));
+}
+if (tierProCard) {
+    tierProCard.addEventListener('click', () => selectPlan('pro'));
+}
+if (tierAgencyCard) {
+    tierAgencyCard.addEventListener('click', () => selectPlan('agency'));
+}
 
 function selectPlan(plan) {
-    tierFreeCard.classList.toggle('active', plan === 'free');
-    tierProCard.classList.toggle('active', plan === 'pro');
-    tierAgencyCard.classList.toggle('active', plan === 'agency');
+    if (tierFreeCard) tierFreeCard.classList.toggle('active', plan === 'free');
+    if (tierProCard) tierProCard.classList.toggle('active', plan === 'pro');
+    if (tierAgencyCard) tierAgencyCard.classList.toggle('active', plan === 'agency');
 
-    if (plan === 'free') {
-        btnProUpgrade.setAttribute('data-en', 'Downgrade to Free');
-        btnProUpgrade.setAttribute('data-bn', 'ফ্রি টায়ারে ফিরে যান');
-    } else {
-        btnProUpgrade.setAttribute('data-en', 'Upgrade Subscription');
-        btnProUpgrade.setAttribute('data-bn', 'সাবস্ক্রিপশন আপগ্রেড করুন');
+    if (btnProUpgrade) {
+        if (plan === 'free') {
+            btnProUpgrade.setAttribute('data-en', 'Downgrade to Free');
+            btnProUpgrade.setAttribute('data-bn', 'ফ্রি টায়ারে ফিরে যান');
+        } else {
+            btnProUpgrade.setAttribute('data-en', 'Upgrade Subscription');
+            btnProUpgrade.setAttribute('data-bn', 'সাবস্ক্রিপশন আপগ্রেড করুন');
+        }
     }
     toggleLanguage(currentLang);
 }
@@ -663,10 +675,10 @@ function initBkashFlow() {
     
     let price = "BDT 990.00";
     let plan = 'pro';
-    if (tierAgencyCard.classList.contains('active')) {
+    if (tierAgencyCard && tierAgencyCard.classList.contains('active')) {
         price = "BDT 2,990.00";
         plan = 'agency';
-    } else if (tierFreeCard.classList.contains('active')) {
+    } else if (tierFreeCard && tierFreeCard.classList.contains('active')) {
         price = "BDT 0.00";
         plan = 'free';
     }
