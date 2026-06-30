@@ -4,6 +4,32 @@
 
 const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
 
+// Safe Session Storage Helper with In-Memory fallback (incognito mode support)
+const SafeSession = {
+    _memoryStore: {},
+    setItem(key, value) {
+        try {
+            sessionStorage.setItem(key, value);
+        } catch (e) {
+            this._memoryStore[key] = value;
+        }
+    },
+    getItem(key) {
+        try {
+            return sessionStorage.getItem(key);
+        } catch (e) {
+            return this._memoryStore[key] || null;
+        }
+    },
+    removeItem(key) {
+        try {
+            sessionStorage.removeItem(key);
+        } catch (e) {
+            delete this._memoryStore[key];
+        }
+    }
+};
+
 // Translations Dictionaries
 const translations = {
     en: {
@@ -172,7 +198,7 @@ function checkUrlSession() {
             tier: params.get('tier') || 'free'
         };
         
-        sessionStorage.setItem('hisabad_user', JSON.stringify(userSession));
+        SafeSession.setItem('hisabad_user', JSON.stringify(userSession));
         
         // Clean URL params
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -182,7 +208,7 @@ function checkUrlSession() {
 }
 
 function loadStoredSession() {
-    const stored = sessionStorage.getItem('hisabad_user');
+    const stored = SafeSession.getItem('hisabad_user');
     if (stored) {
         loggedInUser = JSON.parse(stored);
         currentTier = loggedInUser.tier;
@@ -241,7 +267,7 @@ function fetchCampaignsFromBackend() {
 
 // Disconnect/Logout handler
 document.getElementById('btn-logout').addEventListener('click', () => {
-    sessionStorage.removeItem('hisabad_user');
+    SafeSession.removeItem('hisabad_user');
     loggedInUser = null;
     currentTier = 'free';
     switchScreen('onboarding');
@@ -332,7 +358,7 @@ document.getElementById('btn-sim-access-granted').addEventListener('click', () =
         name: "Agency Account (Audit Client)",
         tier: "free"
     };
-    sessionStorage.setItem('hisabad_user', JSON.stringify(mockUserSession));
+    SafeSession.setItem('hisabad_user', JSON.stringify(mockUserSession));
     loadStoredSession();
 });
 
@@ -730,6 +756,10 @@ document.getElementById('bkash-done').addEventListener('click', () => {
 /* ==========================================================================
    8. Initializer
    ========================================================================== */
-window.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', () => {
+        checkUrlSession();
+    });
+} else {
     checkUrlSession();
-});
+}
