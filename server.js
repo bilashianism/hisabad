@@ -28,6 +28,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Disable caching to prevent browser caching of index.html and app.js
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    next();
+});
+
 // Serve static frontend files directly from root
 app.use(express.static(path.join(__dirname, '.')));
 
