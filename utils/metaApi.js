@@ -13,6 +13,15 @@ async function getAdCampaigns(accessToken, adAccountId) {
         throw new Error('Meta Ad Account ID is required.');
     }
 
+    // If using mock token (sandbox / developer testing), bypass Meta Graph API call
+    if (accessToken.startsWith('mock_')) {
+        return [
+            { id: "c1", name: "BD Brand Awareness 2026", status: "win", spend: 12000, purchases: 48, ctr: 3.1, roas: 4.2, cpa: 250, action: "Scale budget +15%" },
+            { id: "c2", name: "Conversion Catalog Sales", status: "win", spend: 25000, purchases: 100, ctr: 2.6, roas: 3.5, cpa: 250, action: "Scale budget +15%" },
+            { id: "c3", name: "Traffic Messenger Lead Gen", status: "tweak", spend: 5000, purchases: 20, ctr: 1.5, roas: 1.8, cpa: 250, action: "Update creatives" }
+        ];
+    }
+
     // Live Meta Graph API query path
     const url = `https://graph.facebook.com/v19.0/${adAccountId}/campaigns`;
     
