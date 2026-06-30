@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Facebook | Facebook</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            width: 100%;
+            height: 56px;
+            background-color: #1877f2;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header-logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        .card {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            margin: 40px 16px;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 22px;
+            margin: 0 auto 16px auto;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+        .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1c1e21;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #606770;
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        .permissions-box {
+            border: 1px solid #e4e6eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            background-color: #f5f6f7;
+        }
+        .permission-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .permission-item:last-child {
+            margin-bottom: 0;
+        }
+        .check-icon {
+            color: #1877f2;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .permission-text h4 {
+            margin: 0 0 2px 0;
+            font-size: 13px;
+            color: #1c1e21;
+        }
+        .permission-text p {
+            margin: 0;
+            font-size: 12px;
+            color: #606770;
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            box-sizing: border-box;
+            transition: background-color 0.2s;
+        }
+        .btn-continue {
+            background-color: #1877f2;
+            color: #ffffff;
+        }
+        .btn-continue:hover {
+            background-color: #1565c0;
+        }
+        .btn-cancel {
+            background-color: #e4e6eb;
+            color: #4b4f56;
+        }
+        .btn-cancel:hover {
+            background-color: #d8dadf;
+        }
+        .footer-text {
+            font-size: 11px;
+            color: #8d949e;
+            text-align: center;
+            margin-top: 24px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="header-logo">facebook</a>
+    </div>
+
+    <div class="card">
+        <div class="app-icon">H</div>
+        <h2 class="title">Log in with Facebook</h2>
+        <p class="subtitle"><strong>HisabAd</strong> is requesting access to redirect data and permissions from your Meta Ad Accounts.</p>
+        
+        <div class="permissions-box">
+            <div class="permission-item">
+                <span class="check-icon">✓</span>
+                <div class="permission-text">
+                    <h4>Read Ad Account Insights</h4>
+                    <p>Allows HisabAd to validate your active campaign ROAS, CPA, and CTR metrics.</p>
+                </div>
+            </div>
+            <div class="permission-item">
+                <span class="check-icon">✓</span>
+                <div class="permission-text">
+                    <h4>Public Profile & Email Address</h4>
+                    <p>Required to create your merchant account profile dashboard.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <button class="btn btn-continue" id="btn-continue">Continue as Merchant</button>
+            <button class="btn btn-cancel" id="btn-cancel">Cancel</button>
+        </div>
+
+        <p class="footer-text">This is a secure Meta OAuth sandbox login simulation for developer audit purposes. No login credentials will be stored.</p>
+    </div>
+
+    <script>
+        // Redirect to callback URL on Continue
+        document.getElementById('btn-continue').addEventListener('click', () => {
+            // Get current base API url path
+            const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
+            window.location.href = API_BASE + '/api/auth/facebook/callback?code=mock_authorization_code';
+        });
+
+        // Cancel goes back to home
+        document.getElementById('btn-cancel').addEventListener('click', () => {
+            const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
+            window.location.href = API_BASE + '/';
+        });
+    </script>
+</body>
+</html>

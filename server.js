@@ -44,8 +44,8 @@ app.get('/api/auth/facebook', (req, res) => {
     const authUrl = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=ads_read,email`;
     
     if (appId === 'mock_app_id' || appId.startsWith('mock_')) {
-        // If developer sandbox mode, bypass Facebook redirect
-        return res.json({ url: `/api/auth/facebook/callback?code=mock_authorization_code` });
+        // If developer sandbox mode, redirect to mock Facebook login page
+        return res.json({ url: `/mock-facebook-login.html` });
     }
     
     res.json({ url: authUrl });
