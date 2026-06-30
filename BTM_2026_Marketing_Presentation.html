@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTM 2026 - Paid Ads & Media Buying Strategic Plan</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <style>
+        :root {
+            --bg-color: #060913;
+            --sidebar-bg: rgba(15, 23, 42, 0.6);
+            --slide-bg: rgba(15, 23, 42, 0.4);
+            --card-bg: rgba(30, 41, 59, 0.35);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --accent-pink: #FF5EC4;
+            --accent-cyan: #00F0FF;
+            --accent-gold: #F59E0B;
+            --text-white: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glow-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            position: relative;
+        }
+
+        /* Abstract Glow Orbs */
+        .glow-orb-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 94, 196, 0.08) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, transparent 70%);
+            bottom: -200px;
+            right: -200px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 320px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+        }
+
+        .sidebar-logo {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-logo img {
+            width: 180px;
+            object-fit: contain;
+        }
+
+        .sidebar-logo span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            padding: 14px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            color: var(--text-white);
+            background: linear-gradient(135deg, rgba(255, 94, 196, 0.1) 0%, rgba(0, 240, 255, 0.1) 100%);
+            border-color: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item-num {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--accent-pink);
+            font-size: 0.8rem;
+        }
+
+        .nav-item.active .nav-item-num {
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-footer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* Main Widescreen Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 5;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .slide-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-top: 5px;
+            background: linear-gradient(135deg, var(--text-white) 30%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Fullscreen Actions */
+        .btn-action {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-action:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-shadow);
+            color: var(--accent-cyan);
+        }
+
+        /* Slide Viewport */
+        .viewport {
+            flex-grow: 1;
+            background: var(--slide-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+        }
+
+        .slide-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-content.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* Cards & Dashboard Widgets */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.08);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+        }
+
+        .card-header {
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-white);
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-cyan);
+        }
+
+        .card-body {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            flex-grow: 1;
+        }
+
+        /* Budget progress sliders */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        /* Table styling */
+        .table-container {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background-color: rgba(15, 23, 42, 0.8);
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-align: left;
+            padding: 14px 20px;
+            border-bottom: 2px solid var(--border-color);
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-white);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Slide 1 - Hero Layout */
+        .slide-hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-left {
+            width: 55%;
+        }
+
+        .hero-right {
+            width: 40%;
+            background: radial-gradient(circle at center, rgba(255, 94, 196, 0.05), transparent 70%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .hero-right::after {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255,94,196,0.2), transparent, rgba(0,240,255,0.2));
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hero-pulse-badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
+            100% { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 94, 196, 0.4); }
+        }
+
+        /* Footer Controls */
+        .slide-footer-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-tips {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-nav {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: var(--glow-shadow);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Radial Background glows -->
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <!-- SIDEBAR NAVIGATION PANEL -->
+    <aside>
+        <div class="sidebar-logo">
+            <img src="btm_logo.png" alt="BTM Logo">
+            <span>PAID ADS PLAN</span>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="jumpToSlide(0)">
+                <span class="nav-item-num">01</span> Strategic Overview
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(1)">
+                <span class="nav-item-num">02</span> Budget Allocation Matrix
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(2)">
+                <span class="nav-item-num">03</span> Meta Ads Strategy
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(3)">
+                <span class="nav-item-num">04</span> LinkedIn Ads Strategy
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(4)">
+                <span class="nav-item-num">05</span> Google Search Strategy
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            Bangladesh Travel Mart 2026<br>
+            Paid Ads Plan ($15,000 USD)<br>
+            Organized by BOTOA
+        </div>
+    </aside>
+
+    <!-- MAIN PRESENTATION BODY -->
+    <main>
+        
+        <!-- HEADER CONTROL PANEL -->
+        <div class="slide-header">
+            <div>
+                <span class="slide-tag" id="slide-tracker-tag">BTM 2026 ROADMAP</span>
+                <h1 class="slide-title" id="slide-main-title">Strategic Paid Ads & Media Buying Plan</h1>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn-action" id="fullscreen-toggle">Fullscreen Mode</button>
+            </div>
+        </div>
+
+        <!-- VIEWPORT CANVAS -->
+        <div class="viewport">
+
+            <!-- SLIDE 1: Title Cover -->
+            <div class="slide-content active">
+                <div class="slide-hero">
+                    <div class="hero-left">
+                        <img src="btm_logo.png" alt="BTM Logo" style="width: 440px; margin-bottom: 25px; object-fit: contain;">
+                        <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                            A simplified, data-oriented media buying plan showing exactly where we will allocate the $15,000 USD budget across Meta, LinkedIn, and Google Search campaigns to drive maximum ROI.
+                        </p>
+                        <div style="display: flex; gap: 20px;">
+                            <div class="dash-widget-info" style="border-left: 3px solid var(--accent-pink); padding-left: 15px;">
+                                <h4>BUDGET</h4>
+                                <p style="font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan);">$15,000 USD</p>
+                            </div>
+                            <div class="dash-widget-info" style="border-left: 3px solid var(--accent-cyan); padding-left: 15px;">
+                                <h4>CAMPAIGNS</h4>
+                                <p style="font-size: 1.25rem; font-weight: 700;">Meta, LinkedIn, Google</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-right">
+                        <div class="hero-pulse-badge">📊</div>
+                        <h4 style="font-family: 'Outfit'; font-size: 1.2rem; font-weight: 700; margin-bottom: 5px;">PAID MEDIA METRICS</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px; max-width: 80%;">Every dollar mapped to specific CPAs and registration goals.</p>
+                        <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.2); padding: 10px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan);">
+                            5 FOCUSED SLIDES
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Budget Allocation Matrix -->
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="card" style="justify-content: center;">
+                        <h3 class="card-title" style="color: var(--accent-pink); margin-bottom: 20px; font-size: 1.2rem;">Budget Split Breakdown</h3>
+                        
+                        <div class="progress-container">
+                            <div>
+                                <div class="progress-label">
+                                    <span>Meta Ads (60%)</span>
+                                    <span style="color: var(--accent-pink);">$9,000 USD</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%; background-color: var(--accent-pink);"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="progress-label">
+                                    <span>LinkedIn Ads (25%)</span>
+                                    <span style="color: var(--accent-cyan);">$3,750 USD</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%; background-color: var(--accent-cyan);"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="progress-label">
+                                    <span>Google Search (15%)</span>
+                                    <span style="color: var(--accent-gold);">$2,250 USD</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 15%; background-color: var(--accent-gold);"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                            • <strong>Meta:</strong> Drives high-volume visitor tickets and local buyer lead generation.<br>
+                            • <strong>LinkedIn:</strong> Target high-value international stall buyers.<br>
+                            • <strong>Google:</strong> Catches active searching intent for training and fair keywords.
+                        </p>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Channel / Objective</th>
+                                    <th>Budget</th>
+                                    <th style="text-align: right;">Target CPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Meta Leads (B2B Local Buyers)</td>
+                                    <td>$5,250</td>
+                                    <td style="text-align: right; color: var(--accent-cyan); font-weight: bold;">$3.50 / Lead</td>
+                                </tr>
+                                <tr>
+                                    <td>Meta Tickets (B2C Visitors)</td>
+                                    <td>$3,750</td>
+                                    <td style="text-align: right; color: var(--accent-cyan); font-weight: bold;">$1.20 / Ticket</td>
+                                </tr>
+                                <tr>
+                                    <td>LinkedIn Leads (Stall Sales)</td>
+                                    <td>$3,750</td>
+                                    <td style="text-align: right; color: var(--accent-cyan); font-weight: bold;">$45.00 / Lead</td>
+                                </tr>
+                                <tr>
+                                    <td>Google Search (High Intent)</td>
+                                    <td>$1,500</td>
+                                    <td style="text-align: right; color: var(--accent-cyan); font-weight: bold;">$2.50 / Click</td>
+                                </tr>
+                                <tr>
+                                    <td>Retargeting (Google Display)</td>
+                                    <td>$750</td>
+                                    <td style="text-align: right; color: var(--accent-cyan); font-weight: bold;">Optimize reach</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Meta Ads Plan -->
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="card" style="border-left: 4px solid var(--accent-pink);">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-pink);">1. B2B LOCAL BUYER LEADS ($5,250)</h3>
+                            <span class="card-subtitle">Targeting Travel Operators</span>
+                        </div>
+                        <div class="card-body" style="font-size: 0.88rem; line-height: 1.6;">
+                            <p style="margin-bottom: 12px;"><strong>Goal:</strong> Acquire 1,500+ registrations from local travel agents & outbound tour operators.</p>
+                            <p style="margin-bottom: 12px;"><strong>Targeting:</strong> Outbound travel agencies, tourism business owners, travel managers in Bangladesh.</p>
+                            <p style="margin-bottom: 12px;"><strong>Creative:</strong> Video ads detailing 'Hosted Buyer Benefits' (3 Nights Hotel, Pre-scheduled meetings, Networking dinners).</p>
+                            <p><strong>CPA:</strong> Target $3.50 per approved lead signup.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-cyan);">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-cyan);">2. B2C GENERAL TICKETS ($3,750)</h3>
+                            <span class="card-subtitle">Targeting General Public</span>
+                        </div>
+                        <div class="card-body" style="font-size: 0.88rem; line-height: 1.6;">
+                            <p style="margin-bottom: 12px;"><strong>Goal:</strong> Sell 3,000+ visitor entry tickets online.</p>
+                            <p style="margin-bottom: 12px;"><strong>Targeting:</strong> Affluent families, honeymooners, and interest in international airlines and package tours in Dhaka.</p>
+                            <p style="margin-bottom: 12px;"><strong>Creative:</strong> Carousel ads highlighting exclusive discounts & packages from 130+ travel operators.</p>
+                            <p><strong>CPA:</strong> Target $1.20 per visitor ticket conversion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: LinkedIn Ads Plan -->
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-cyan);">LinkedIn Stall Sales ($3,750)</h3>
+                            <span class="card-subtitle">International Sellers Targeting</span>
+                        </div>
+                        <div class="card-body" style="font-size: 0.9rem; line-height: 1.7;">
+                            <p style="margin-bottom: 15px;"><strong>Goal:</strong> Capture 80+ high-quality corporate leads from foreign DMCs, hotel groups, and Tourism Boards (NTOs) to sell pavilions/stalls.</p>
+                            <p style="margin-bottom: 15px;"><strong>Geographic Focus:</strong> APAC & Middle East regions (Malaysia, Thailand, Turkey, Singapore, Saudi Arabia, Dubai).</p>
+                            <p><strong>CPA Target:</strong> $45.00 / Lead (Sales team to follow up directly to close stall contracts).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="border-left: 4px solid var(--accent-cyan);">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--text-white);">LinkedIn Targeting Details</h3>
+                        </div>
+                        <div class="card-body" style="font-size: 0.85rem; line-height: 1.6;">
+                            <p style="margin-bottom: 10px;"><strong>Sectors:</strong> Leisure & Travel, Hospitality, Airlines, Government Relations.</p>
+                            <p style="margin-bottom: 10px;"><strong>Job Titles:</strong> GM, Director of Sales, Outbound Manager, Tourism Representative, Marketing Lead.</p>
+                            <p style="margin-bottom: 10px;"><strong>Job Functions:</strong> Business Development, Sales, Marketing, Executive.</p>
+                            <p><strong>Ad Formats:</strong> Document Ads distributing 'Outbound Tourism Growth in Bangladesh Market Report' (collects contact info to unlock).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Google Search Ads Plan -->
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); letter-spacing: 1px;">STALLS CAMPAIGN</span>
+                            <h3 class="card-title" style="margin-top: 5px; font-size: 1.15rem; color: var(--accent-cyan);">1. Exhibitor Sales ($750)</h3>
+                        </div>
+                        <div class="card-body" style="font-size: 0.85rem; line-height: 1.6;">
+                            • <strong>Target Keywords:</strong> 'travel mart dhaka registration', 'btm 2026 stalls', 'bangladesh travel fair exhibitor'.<br><br>
+                            • <strong>Landing Page:</strong> Stall booking floor plan and contract request.<br><br>
+                            • <strong>Goal:</strong> Capture foreign companies actively searching for stalls.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-pink); letter-spacing: 1px;">BUYERS CAMPAIGN</span>
+                            <h3 class="card-title" style="margin-top: 5px; font-size: 1.15rem; color: var(--accent-pink);">2. Hosted Buyers ($750)</h3>
+                        </div>
+                        <div class="card-body" style="font-size: 0.85rem; line-height: 1.6;">
+                            • <strong>Target Keywords:</strong> 'hosted buyer program travel mart', 'dhaka travel fair agent registration', 'B2B travel fair'.<br><br>
+                            • <strong>Landing Page:</strong> Hosted Buyer Vetted Application Form.<br><br>
+                            • <strong>Goal:</strong> Vetted signups from agencies looking to meet foreign operators.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px;">TRAINING CAMPAIGN</span>
+                            <h3 class="card-title" style="margin-top: 5px; font-size: 1.15rem; color: var(--accent-gold);">3. Seminars ($750)</h3>
+                        </div>
+                        <div class="card-body" style="font-size: 0.85rem; line-height: 1.6;">
+                            • <strong>Target Keywords:</strong> 'visa processing training dhaka', 'tourism e-commerce seminar', 'BOTOA training registration'.<br><br>
+                            • <strong>Landing Page:</strong> Certified Seminar registrations & Payment portal.<br><br>
+                            • <strong>Goal:</strong> Capture local travel agency consultants looking for certified training.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM CONTROLS -->
+        <div class="slide-footer-controls">
+            <div class="slide-tips">
+                Use <span style="font-weight: 700; color: var(--accent-pink);">Left/Right Arrow keys</span> to navigate the presentation.
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn-nav" id="prev-slide-btn">◀</button>
+                <button class="btn-nav" id="next-slide-btn">▶</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Vanilla Javascript for Slide Logic -->
+    <script>
+        const slides = document.querySelectorAll('.slide-content');
+        const navItems = document.querySelectorAll('.nav-item');
+        const slideTrackerTag = document.getElementById('slide-tracker-tag');
+        const slideMainTitle = document.getElementById('slide-main-title');
+        const prevSlideBtn = document.getElementById('prev-slide-btn');
+        const nextSlideBtn = document.getElementById('next-slide-btn');
+        const fsToggle = document.getElementById('fullscreen-toggle');
+        
+        let currentIdx = 0;
+        const totalIdx = slides.length;
+
+        // Slide Title and Tags Metadata
+        const slideMeta = [
+            { tag: "BTM 2026 ROADMAP", title: "Strategic Paid Ads & Media Buying Plan" },
+            { tag: "BUDGET ALLOCATION", title: "Ad Budget & Channels Matrix ($15k USD)" },
+            { tag: "META ADS PLAN", title: "Meta Ads Campaigns ($9,000 Budget)" },
+            { tag: "LINKEDIN ADS PLAN", title: "LinkedIn Ads Campaign ($3,750 Budget)" },
+            { tag: "GOOGLE SEARCH PLAN", title: "Google Search Campaigns ($2,250 Budget)" }
+        ];
+
+        function jumpToSlide(index) {
+            if (index < 0 || index >= totalIdx) return;
+            
+            slides[currentIdx].classList.remove('active');
+            navItems[currentIdx].classList.remove('active');
+            
+            currentIdx = index;
+            slides[currentIdx].classList.add('active');
+            navItems[currentIdx].classList.add('active');
+            
+            slideTrackerTag.textContent = slideMeta[currentIdx].tag;
+            slideMainTitle.textContent = slideMeta[currentIdx].title;
+        }
+
+        prevSlideBtn.addEventListener('click', () => {
+            if (currentIdx > 0) jumpToSlide(currentIdx - 1);
+        });
+
+        nextSlideBtn.addEventListener('click', () => {
+            if (currentIdx < totalIdx - 1) jumpToSlide(currentIdx + 1);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentIdx > 0) {
+                jumpToSlide(currentIdx - 1);
+            } else if (e.key === 'ArrowRight' && currentIdx < totalIdx - 1) {
+                jumpToSlide(currentIdx + 1);
+            }
+        });
+
+        fsToggle.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error enabling fullscreen: ${err.message}`);
+                });
+                fsToggle.textContent = "Exit Fullscreen";
+            } else {
+                document.exitFullscreen();
+                fsToggle.textContent = "Fullscreen Mode";
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fsToggle.textContent = "Fullscreen Mode";
+            }
+        });
+    </script>
+</body>
+</html>

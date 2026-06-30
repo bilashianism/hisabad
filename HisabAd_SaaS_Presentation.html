@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HisabAd - Meta Ads Validation SaaS Pitch Deck</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <style>
+        :root {
+            --bg-color: #060913;
+            --sidebar-bg: rgba(13, 20, 35, 0.7);
+            --slide-bg: rgba(13, 20, 35, 0.35);
+            --card-bg: rgba(30, 41, 59, 0.25);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --accent-purple: #a855f7;
+            --accent-indigo: #6366f1;
+            --accent-cyan: #00F0FF;
+            --accent-gold: #F59E0B;
+            --status-win: #10b981;
+            --status-loss: #ef4444;
+            --text-white: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glow-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            position: relative;
+        }
+
+        /* Abstract Glow Orbs */
+        .glow-orb-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+            top: -200px;
+            left: -100px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            bottom: -200px;
+            right: -100px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 320px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+        }
+
+        .sidebar-logo {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-purple) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.15rem;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .highlight {
+            color: var(--accent-purple);
+        }
+
+        .sidebar-logo span.tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            padding: 14px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            color: var(--text-white);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item-num {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+        }
+
+        .nav-item.active .nav-item-num {
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-footer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 5;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .slide-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-top: 5px;
+            background: linear-gradient(135deg, var(--text-white) 40%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Fullscreen Toggle */
+        .btn-action {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-action:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Slide Viewport */
+        .slide-viewport {
+            flex-grow: 1;
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide-content {
+            display: none;
+            width: 100%;
+            animation: slideIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .slide-content.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Presentation Cards & Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .highlight-text {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* Timeline and Points Styles */
+        .points-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .point-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-purple);
+            margin-top: 7px;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--accent-purple);
+        }
+
+        .point-bullet.cyan {
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .point-bullet.gold {
+            background-color: var(--accent-gold);
+            box-shadow: 0 0 8px var(--accent-gold);
+        }
+
+        /* Large Hero Title for Intro Slide */
+        .hero-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 30%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Bottom Controls */
+        .slide-footer-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            margin-top: 15px;
+        }
+
+        .slide-tips {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-indigo);
+            border-color: transparent;
+            box-shadow: var(--accent-glow);
+        }
+
+        /* Target Customers Grid */
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .avatar-circle.cyan {
+            background: radial-gradient(circle, #00f0ff 0%, #6366f1 100%);
+        }
+
+        .avatar-circle.purple {
+            background: radial-gradient(circle, #a855f7 0%, #6366f1 100%);
+        }
+
+        .avatar-circle.gold {
+            background: radial-gradient(circle, #f59e0b 0%, #a855f7 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Glow Backdrops -->
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside>
+        <div class="sidebar-logo">
+            <div class="logo-icon">H</div>
+            <div style="display: flex; flex-direction: column;">
+                <span class="logo-text">Hisab<span class="highlight">Ad</span></span>
+                <span class="tag">PITCH DECK</span>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="jumpToSlide(0)">
+                <span class="nav-item-num">01</span>
+                <span>Executive Summary</span>
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(1)">
+                <span class="nav-item-num">02</span>
+                <span>The Core Engine</span>
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(2)">
+                <span class="nav-item-num">03</span>
+                <span>Design System & UX</span>
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(3)">
+                <span class="nav-item-num">04</span>
+                <span>Target Customers</span>
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(4)">
+                <span class="nav-item-num">05</span>
+                <span>Monetization Model</span>
+            </li>
+            <li class="nav-item" onclick="jumpToSlide(5)">
+                <span class="nav-item-num">06</span>
+                <span>Implementation Roadmap</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            HisabAd Pitch Deck<br>
+            <span style="font-size: 0.7rem; opacity: 0.7;">Confidential - For Internal Teams</span>
+        </div>
+    </aside>
+
+    <!-- MAIN BODY -->
+    <main>
+        
+        <!-- TOP STATUS HEADER -->
+        <div class="slide-header">
+            <div>
+                <span class="slide-tag" id="slide-tracker-tag">01 / CONCEPT SUMMARY</span>
+                <h1 class="slide-title" id="slide-main-title">Executive Summary</h1>
+            </div>
+            <button class="btn-action" id="fullscreen-toggle">Fullscreen Mode</button>
+        </div>
+
+        <!-- VIEWPORT SLIDES -->
+        <div class="slide-viewport">
+            
+            <!-- SLIDE 1: Executive Summary -->
+            <div class="slide-content active">
+                <div class="hero-slide">
+                    <span class="hero-tag">THE PROBLEM WE SOLVE</span>
+                    <h2 class="hero-title">An Independent "Referee" for Facebook Ads Spend</h2>
+                    <p class="hero-desc">
+                        Thousands of Bangladeshi F-Commerce shop owners spend millions of BDT on Facebook Ads through marketing agencies. However, they lack the technical literacy to audit reports, resulting in blind trust and hidden wastage. <span class="highlight-text">HisabAd</span> translates confusing Ads Manager spreadsheets into a simple, honest **Winning vs. Losing** grade.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Core Engine & Onboarding -->
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-purple); letter-spacing: 1px;">0-100 ALGORITHM</span>
+                            <h3 class="card-title" style="margin-top: 5px;">The "Winning vs. Losing" Engine</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="points-list">
+                                <li class="point-item">
+                                    <span class="point-bullet"></span>
+                                    <span><strong>🟢 Winning (Score 70+):</strong> High ROAS, low CPA, high CTR. System suggests increasing ad budget.</span>
+                                </li>
+                                <li class="point-item">
+                                    <span class="point-bullet gold"></span>
+                                    <span><strong>🟡 Tweak Needed (Score 40-69):</strong> Borderline ROAS but low CTR. Prompts user to swap ad images/creative.</span>
+                                </li>
+                                <li class="point-item">
+                                    <span class="point-bullet loss"></span>
+                                    <span><strong>🔴 Losing (Score &lt; 40):</strong> High spend, zero sales. Urges the merchant to pause campaigns immediately.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); letter-spacing: 1px;">META COMPLIANCE</span>
+                            <h3 class="card-title" style="margin-top: 5px;">Dual-Onboarding Flows</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="points-list">
+                                <li class="point-item">
+                                    <span class="point-bullet cyan"></span>
+                                    <span><strong>Flow A (Self-Run Ads):</strong> Secure 1-click <em>Facebook Login</em> OAuth flow pulling direct ad insights from the Meta Graph API.</span>
+                                </li>
+                                <li class="point-item">
+                                    <span class="point-bullet cyan"></span>
+                                    <span><strong>Flow B (Agency-Run Ads):</strong> Copyable requests wizard allowing merchants to send predefined, professional templates to their agency demanding View-Only Analyst rights.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Design System & UX -->
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-purple);">1. Glassmorphism UI</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Visual Theme:** Premium futuristic dark mode using radial gradients and translucent glass cards.  
+                            * **Simplicity First:** Minimalist navigation containing only crucial numbers to prevent data fatigue.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-cyan);">2. Localization</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Language Toggle:** Instant dashboard translation between English and Bangla.  
+                            * **MFS Billing checkout:** A familiar, native-looking bKash, Nagad, and Rocket portal simulator built directly into the pricing journey.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color: var(--accent-gold);">3. WhatsApp Delivery</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Zero-Login Reports:** Business owners receive structured PDF summaries sent straight to their WhatsApp or Messenger.  
+                            * **Real-time Alerting:** Immediate notifications when a campaign drops below efficiency levels.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: Target Customers -->
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="avatar-circle cyan">🛍️</div>
+                        <div class="card-header">
+                            <h3 class="card-title">F-Commerce Owners</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Profile:** Social media shop owners selling sarees, fashion, gadgets, or food on Facebook pages.  
+                            * **Pain Point:** Lack of tech skills to parse Google Sheets or Ads Manager; heavily reliant on outsourced marketing.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="avatar-circle purple">🏢</div>
+                        <div class="card-header">
+                            <h3 class="card-title">Boutique Agencies</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Profile:** Small-to-medium digital marketing agencies managing ad campaigns for multiple clients.  
+                            * **Pain Point:** Spending hours manually writing client reports. Wants white-labeled, simplified client dashboards.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="avatar-circle gold">🚀</div>
+                        <div class="card-header">
+                            <h3 class="card-title">SME Advertisers</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Profile:** Small business founders running their own ads to drive sales but wasting money on unoptimized audiences.  
+                            * **Pain Point:** High cost-per-purchase (CPA) eating their profit margins.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Monetization & Checkout -->
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px;">LEAD MAGNET</span>
+                            <h3 class="card-title" style="margin-top: 5px; color: var(--text-white);">Free Tier</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Price:** 0 BDT  
+                            * **Features:** Audit up to 2 active ad campaigns for free. Gives an instant validation report to hook users.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-purple); letter-spacing: 1px;">POPULAR</span>
+                            <h3 class="card-title" style="margin-top: 5px; color: var(--accent-purple);">Pro Tier</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Price:** ~990 BDT / month  
+                            * **Features:** Continuous daily campaign monitoring, weekly PDF reports sent to WhatsApp, and detailed optimization guides.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); letter-spacing: 1px;">SCALED</span>
+                            <h3 class="card-title" style="margin-top: 5px; color: var(--accent-cyan);">Agency Tier</h3>
+                        </div>
+                        <div class="card-body card-desc">
+                            * **Price:** ~2,990 BDT / month  
+                            * **Features:** Multi-client account tracking, white-labeled reporting layouts with custom agency logo, and automatic report delivery.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Roadmap -->
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); letter-spacing: 1px;">PHASE 1 - 2</span>
+                            <h3 class="card-title" style="margin-top: 5px;">Mockup & Integration</h3>
+                        </div>
+                        <div class="card-body card-desc" style="line-height: 1.8;">
+                            • **Interactive Frontend Mockup:** *(Done)* Core views, sliders, and bKash simulation.  
+                            • **Meta OAuth Setup:** Configure developer test sandbox accounts and OAuth callback tokens.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-purple); letter-spacing: 1px;">PHASE 3 - 4</span>
+                            <h3 class="card-title" style="margin-top: 5px;">Backend & Billing</h3>
+                        </div>
+                        <div class="card-body card-desc" style="line-height: 1.8;">
+                            • **Analytics Engine:** Connect Node.js/Python API endpoints to Meta Graph.  
+                            • **WhatsApp Integration:** Auto-trigger PDF generation.  
+                            • **Local MFS Gateways:** Connect SSLCOMMERZ/bKash API checkouts.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px;">PHASE 5</span>
+                            <h3 class="card-title" style="margin-top: 5px;">Closed Beta Launch</h3>
+                        </div>
+                        <div class="card-body card-desc" style="line-height: 1.8;">
+                            • **Beta Group:** Recruit 10 Dhaka-based F-Commerce store owners.  
+                            • **Pilot agencies:** Onboard 2 digital marketing agencies to test the White-Label reporting dashboard.  
+                            • **Feedback loop:** Refine based on BDT scaling stats.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM CONTROLS -->
+        <div class="slide-footer-controls">
+            <div class="slide-tips">
+                Use <span style="font-weight: 700; color: var(--accent-purple);">Left/Right Arrow keys</span> or click sidebar to navigate.
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn-nav" id="prev-slide-btn">◀</button>
+                <button class="btn-nav" id="next-slide-btn">▶</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Slide Logic Script -->
+    <script>
+        const slides = document.querySelectorAll('.slide-content');
+        const navItems = document.querySelectorAll('.nav-item');
+        const slideTrackerTag = document.getElementById('slide-tracker-tag');
+        const slideMainTitle = document.getElementById('slide-main-title');
+        const prevSlideBtn = document.getElementById('prev-slide-btn');
+        const nextSlideBtn = document.getElementById('next-slide-btn');
+        const fsToggle = document.getElementById('fullscreen-toggle');
+        
+        let currentIdx = 0;
+        const totalIdx = slides.length;
+
+        // Metadata for Header Updates
+        const slideMeta = [
+            { tag: "01 / CONCEPT SUMMARY", title: "Executive Summary" },
+            { tag: "02 / PRODUCT FEATURES", title: "The 'Winning vs. Losing' Engine" },
+            { tag: "03 / UI & USER EXPERIENCE", title: "Designed for Bangladeshi Merchants" },
+            { tag: "04 / MARKET SEGMENTS", title: "Target Customers" },
+            { tag: "05 / BUSINESS MODEL", title: "Monetization & local payment checkout" },
+            { tag: "06 / PRODUCT ROADMAP", title: "Implementation Roadmap" }
+        ];
+
+        function jumpToSlide(index) {
+            if (index < 0 || index >= totalIdx) return;
+            
+            slides[currentIdx].classList.remove('active');
+            navItems[currentIdx].classList.remove('active');
+            
+            currentIdx = index;
+            slides[currentIdx].classList.add('active');
+            navItems[currentIdx].classList.add('active');
+            
+            slideTrackerTag.textContent = slideMeta[currentIdx].tag;
+            slideMainTitle.textContent = slideMeta[currentIdx].title;
+        }
+
+        prevSlideBtn.addEventListener('click', () => {
+            if (currentIdx > 0) jumpToSlide(currentIdx - 1);
+        });
+
+        nextSlideBtn.addEventListener('click', () => {
+            if (currentIdx < totalIdx - 1) jumpToSlide(currentIdx + 1);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentIdx > 0) {
+                jumpToSlide(currentIdx - 1);
+            } else if (e.key === 'ArrowRight' && currentIdx < totalIdx - 1) {
+                jumpToSlide(currentIdx + 1);
+            }
+        });
+
+        fsToggle.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error enabling fullscreen: ${err.message}`);
+                });
+                fsToggle.textContent = "Exit Fullscreen";
+            } else {
+                document.exitFullscreen();
+                fsToggle.textContent = "Fullscreen Mode";
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fsToggle.textContent = "Fullscreen Mode";
+            }
+        });
+    </script>
+</body>
+</html>

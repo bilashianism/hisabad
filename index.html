@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HisabAd - Meta Ads Validation Engine for Bangladesh</title>
+    <!-- Google Fonts: Outfit for headers, Inter for UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body class="dark-theme">
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-logo">
+                <div class="logo-icon">H</div>
+                <span class="logo-text">Hisab<span class="highlight">Ad</span></span>
+                <span class="badge-beta">BETA</span>
+            </div>
+            
+            <div class="header-actions">
+                <!-- Tier Badge -->
+                <div class="tier-badge" id="current-tier-badge">
+                    <span class="dot"></span>
+                    <span id="tier-text" data-en="Free Tier" data-bn="ফ্রি টায়ার">Free Tier</span>
+                </div>
+                
+                <!-- Language Toggle -->
+                <div class="lang-toggle-container">
+                    <button class="lang-btn active" id="lang-en">EN</button>
+                    <button class="lang-btn" id="lang-bn">বাংলা</button>
+                </div>
+
+                <!-- Upgrade Button -->
+                <button class="btn btn-upgrade" id="btn-header-upgrade" data-en="Upgrade to Pro" data-bn="প্রো তে আপগ্রেড করুন">Upgrade to Pro</button>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="app-main">
+
+            <!-- SCREEN 1: ONBOARDING / LANDING -->
+            <section class="screen active" id="screen-onboarding">
+                <div class="welcome-container">
+                    <span class="badge-tag" data-en="Meta Verified Partner" data-bn="মেটা ভেরিফাইড পার্টনার">Meta Verified Partner</span>
+                    <h1 class="welcome-title" data-en="Verify Your Meta Ads Spend in Seconds" data-bn="সেকেন্ডের মধ্যে আপনার ফেসবুক বিজ্ঞপ্তির খরচ যাচাই করুন">Verify Your Meta Ads Spend in Seconds</h1>
+                    <p class="welcome-subtitle" data-en="Don't blind-trust your agency or confuse yourself with complex spreadsheets. Get a simple, independent 'Winning vs. Losing' grade." data-bn="আপনার এজেন্সিকে অন্ধভাবে বিশ্বাস করবেন না বা জটিল স্প্রেডশিট নিয়ে বিভ্রান্ত হবেন না। আপনার বিজ্ঞাপনের একটি সহজ 'জিত বনাম হার' গ্রেড পান।">Don't blind-trust your agency or confuse yourself with complex spreadsheets. Get a simple, independent "Winning vs. Losing" grade.</p>
+                    
+                    <!-- Single, User-Friendly CTA Button -->
+                    <button class="btn btn-primary btn-cta" id="btn-start-audit" data-en="Start Free Campaign Audit" data-bn="ফ্রি ক্যাম্পেইন অডিট শুরু করুন">Start Free Campaign Audit</button>
+                </div>
+
+                <!-- Quick Promo Info Banner -->
+                <div class="promo-banner glass-panel">
+                    <div class="promo-item">
+                        <div class="promo-icon">⚡</div>
+                        <div class="promo-text">
+                            <h4 data-en="Instant Grade" data-bn="তাত্ক্ষণিক অডিট গ্রেড">Instant Grade</h4>
+                            <p data-en="0-100 Score on ROAS, CTR & CPA" data-bn="ROAS, CTR এবং CPA-এর উপর ০-১০০ স্কোর">0-100 Score on ROAS, CTR & CPA</p>
+                        </div>
+                    </div>
+                    <div class="promo-divider"></div>
+                    <div class="promo-item">
+                        <div class="promo-icon">🇧🇩</div>
+                        <div class="promo-text">
+                            <h4 data-en="Made for Bangladesh" data-bn="মার্চেন্টদের জন্য">Made for Bangladesh</h4>
+                            <p data-en="bKash/Nagad billing & Bangla reports" data-bn="বিকাশ পেমেন্ট গেটওয়ে ও বাংলা সমাধান">bKash/Nagad billing & Bangla reports</p>
+                        </div>
+                    </div>
+                    <div class="promo-divider"></div>
+                    <div class="promo-item">
+                        <div class="promo-icon">💬</div>
+                        <div class="promo-text">
+                            <h4 data-en="WhatsApp Alerts" data-bn="হোয়াটসঅ্যাপ আপডেট">WhatsApp Alerts</h4>
+                            <p data-en="Daily updates directly to your inbox" data-bn="প্রতিদিনের আপডেট সরাসরি ইনবক্সে পান">Daily updates directly to your inbox</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 2: MAIN DASHBOARD -->
+            <section class="screen" id="screen-dashboard">
+                <div class="dashboard-sidebar-layout">
+                    
+                    <!-- Left Sidebar Nav -->
+                    <aside class="dashboard-sidebar glass-panel">
+                        <div class="sidebar-nav">
+                            <button class="nav-item active" id="nav-dash">
+                                <span class="nav-icon">📊</span>
+                                <span data-en="Dashboard" data-bn="ড্যাসবোর্ড">Dashboard</span>
+                            </button>
+                            <button class="nav-item" id="nav-campaigns-link">
+                                <span class="nav-icon">📈</span>
+                                <span data-en="Campaigns List" data-bn="বিজ্ঞাপন তালিকা">Campaigns List</span>
+                            </button>
+                            <button class="nav-item" id="nav-billing-link">
+                                <span class="nav-icon">💳</span>
+                                <span data-en="Billing & Plan" data-bn="বিলিং ও প্ল্যান">Billing & Plan</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Profile Card -->
+                        <div class="sidebar-profile">
+                            <div class="profile-avatar" id="profile-avatar">M</div>
+                            <div class="profile-info">
+                                <span class="profile-name" id="profile-name">Merchant</span>
+                                <span class="profile-tier-badge" id="profile-tier-text">Free Tier</span>
+                            </div>
+                            <button class="btn-disconnect" id="btn-logout" title="Disconnect Account">✕</button>
+                        </div>
+                    </aside>
+                    
+                    <!-- Right Main Content Body -->
+                    <div class="dashboard-main-content">
+                        
+                        <!-- Top Row: Metric Cards (Spend, CPA, ROAS) -->
+                        <div class="metrics-row">
+                            <div class="metric-card glass-panel">
+                                <div class="metric-card-header">
+                                    <span data-en="Total Spend" data-bn="মোট ব্যয়">Total Spend</span>
+                                    <span class="metric-icon">💰</span>
+                                </div>
+                                <span class="metric-val" id="card-metric-spend">৳০</span>
+                                <span class="metric-status text-dim" data-en="Meta Ads Monthly" data-bn="মেটা বিজ্ঞাপন মাসিক">Meta Ads Monthly</span>
+                            </div>
+                            
+                            <div class="metric-card glass-panel">
+                                <div class="metric-card-header">
+                                    <span data-en="Cost Per Purchase" data-bn="প্রতি বিক্রয়ে খরচ (CPA)">Cost Per Purchase</span>
+                                    <span class="metric-icon">🎯</span>
+                                </div>
+                                <span class="metric-val" id="card-metric-cpa">৳০</span>
+                                <span class="metric-status" id="card-metric-cpa-status">-</span>
+                            </div>
+                            
+                            <div class="metric-card glass-panel">
+                                <div class="metric-card-header">
+                                    <span data-en="Average ROAS" data-bn="গড় রিটার্ন (ROAS)">Average ROAS</span>
+                                    <span class="metric-icon">📈</span>
+                                </div>
+                                <span class="metric-val" id="card-metric-roas">0x</span>
+                                <span class="metric-status" id="card-metric-roas-status">-</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Middle Row: Score and Campaigns Breakdown -->
+                        <div class="dashboard-middle-grid">
+                            
+                            <!-- Left: Performance Grade Card -->
+                            <div class="glass-panel main-score-card">
+                                <h3 class="card-title-text" data-en="Validation Score" data-bn="ভ্যালিডেশন স্কোর">Validation Score</h3>
+                                
+                                <div class="score-radial-wrapper">
+                                    <svg class="score-ring" viewBox="0 0 120 120">
+                                        <circle class="score-ring-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="score-ring-fill" id="score-ring-progress" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <div class="score-content">
+                                        <span class="score-number" id="lbl-score-num">0</span>
+                                        <span class="score-total">/100</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="score-assessment">
+                                    <div class="status-badge" id="lbl-status-badge">
+                                        <span class="status-dot"></span>
+                                        <span id="lbl-status-text">Tweak Needed</span>
+                                    </div>
+                                    <h2 class="assessment-title" id="lbl-assessment-title" data-en="Analyzing campaign health..." data-bn="ক্যাম্পেইন পারফরম্যান্স বিশ্লেষণ করা হচ্ছে...">Analyzing campaign health...</h2>
+                                    <p class="assessment-desc" id="lbl-assessment-desc" data-en="Connecting to Meta API..." data-bn="মেটা এপিআই কানেক্ট করা হচ্ছে...">Connecting to Meta API...</p>
+                                    
+                                    <div class="assessment-actions">
+                                        <span class="action-prefix" data-en="Recommended Action:" data-bn="সুপারিশকৃত পদক্ষেপ:">Recommended Action:</span>
+                                        <span class="action-bold" id="lbl-action-text" data-en="Loading..." data-bn="লোড হচ্ছে...">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Campaigns Breakdown List (Gorgeously Styled Table) -->
+                            <div class="glass-panel campaign-list-card">
+                                <div class="card-header">
+                                    <h3 data-en="Active Campaigns (Audits)" data-bn="সক্রিয় ক্যাম্পেইনসমূহ (অডিট)">Active Campaigns (Audits)</h3>
+                                    <span class="campaign-count" id="active-campaign-count" data-en="Loading..." data-bn="লোড হচ্ছে...">Loading...</span>
+                                </div>
+                                
+                                <div class="campaign-table-wrapper">
+                                    <table class="campaign-table">
+                                        <thead>
+                                            <tr>
+                                                <th data-en="Campaign Name" data-bn="ক্যাম্পেইনের নাম">Campaign Name</th>
+                                                <th data-en="Status" data-bn="অবস্থা">Status</th>
+                                                <th data-en="CTR" data-bn="ক্লিক হার">CTR</th>
+                                                <th data-en="ROAS" data-bn="রিটার্ন (ROAS)">ROAS</th>
+                                                <th data-en="Recommended Action" data-bn="সুপারিশকৃত অ্যাকশন">Recommended Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="campaign-table-body">
+                                            <!-- Dynamically populated by app.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Row: Automated Reports Console -->
+                        <div class="glass-panel reports-console-card">
+                            <div class="reports-console-content">
+                                <div class="reports-console-text">
+                                    <h3 data-en="Deliver Audit Reports to WhatsApp" data-bn="হোয়াটসঅ্যাপে অডিট রিপোর্ট পাঠান">Deliver Audit Reports to WhatsApp</h3>
+                                    <p class="text-dim" data-en="Enter your WhatsApp number to receive daily campaign validation summaries directly to your phone." data-bn="আপনার হোয়াটসঅ্যাপ নম্বর লিখুন প্রতিদিনের অডিট সামারি সরাসরি পিডিএফ হিসেবে পাওয়ার জন্য।">Enter your WhatsApp number to receive daily campaign validation summaries directly to your phone.</p>
+                                </div>
+                                <div class="reports-console-actions">
+                                    <div class="whatsapp-input-group">
+                                        <span class="country-prefix">+880</span>
+                                        <input type="tel" id="whatsapp-number" class="app-input" placeholder="17XXXXXXXX" value="1712345678">
+                                    </div>
+                                    <button class="btn btn-whatsapp" id="btn-send-whatsapp" data-en="Send to WhatsApp" data-bn="হোয়াটসঅ্যাপে পাঠান">Send to WhatsApp</button>
+                                    <button class="btn btn-secondary" id="btn-download-pdf" data-en="Download PDF" data-bn="পিডিএফ ডাউনলোড">Download PDF</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer text-dim">
+            <p data-en="&copy; 2026 HisabAd Bangladesh. Live Meta Ads Campaign auditor." data-bn="&copy; ২০২৬ হিসাবঅ্যাড বাংলাদেশ। লাইভ মেটা বিজ্ঞাপন অডিটর।">&copy; 2026 HisabAd Bangladesh. Live Meta Ads Campaign auditor.</p>
+        </footer>
+    </div>
+
+    <!-- MODAL 1: AGENCY REQUEST TEMPLATE (Flow B Onboarding) -->
+    <div class="modal-overlay" id="modal-agency-template">
+        <div class="modal-container glass-panel">
+            <div class="modal-header">
+                <h3 data-en="Agency Analyst Access Request" data-bn="এজেন্সি অ্যানালিস্ট অ্যাক্সেস রিকোয়েস্ট">Agency Analyst Access Request</h3>
+                <button class="modal-close" id="btn-close-agency-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p data-en="To audit agency run campaigns, copy and send this message to your agency admin to obtain view-only Analyst rights." data-bn="এজেন্সির চালানো বিজ্ঞাপনগুলো পরীক্ষা করতে এই লেখাটি কপি করে আপনার এজেন্সির এডমিনকে পাঠিয়ে ভিউ-অনলি অ্যানালিস্ট পারমিশন চেয়ে নিন।">To audit agency run campaigns, copy and send this message to your agency admin to obtain view-only Analyst rights.</p>
+                
+                <div class="template-selector">
+                    <button class="btn btn-tab active" id="btn-tpl-en">English</button>
+                    <button class="btn btn-tab" id="btn-tpl-bn">বাংলা</button>
+                </div>
+                
+                <textarea id="agency-template-text" class="app-textarea" readonly></textarea>
+                
+                <div class="modal-footer-actions">
+                    <button class="btn btn-secondary" id="btn-copy-template" data-en="Copy Template Text" data-bn="টেক্সট কপি করুন">Copy Template Text</button>
+                    <button class="btn btn-primary" id="btn-sim-access-granted" data-en="Simulate Access Approved" data-bn="অ্যাক্সেস অনুমোদিত (সিমুলেশন)">Simulate Access Approved</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: bKASH CHECKOUT GATEWAY -->
+    <div class="modal-overlay" id="modal-bkash-checkout">
+        <div class="bkash-container">
+            <div class="bkash-header">
+                <img src="btm_logo.png" alt="bKash Logo" class="bkash-logo-img">
+                <div class="bkash-header-right">
+                    <span class="bold">HisabAd Merchant</span>
+                    <span>Amount: <span id="bkash-amount" class="bold text-pink">BDT 990.00</span></span>
+                </div>
+            </div>
+            
+            <!-- bKash Step 1: Wallet Number -->
+            <div class="bkash-body" id="bkash-step-1">
+                <p class="bkash-body-desc">Enter your bKash Account Number</p>
+                <div class="bkash-input-group">
+                    <span class="bkash-addon">+880</span>
+                    <input type="tel" class="bkash-input-field" id="bkash-phone" placeholder="17XXXXXXXX" value="1712345678">
+                </div>
+                <div class="bkash-agreement">
+                    By clicking Confirm, you agree to our Terms of Use.
+                </div>
+                <div class="bkash-actions">
+                    <button class="btn-bkash bkash-btn-pink" id="bkash-to-otp">PROCEED</button>
+                    <button class="btn-bkash bkash-btn-gray" id="bkash-close-1">CLOSE</button>
+                </div>
+            </div>
+            
+            <!-- bKash Step 2: OTP Verification -->
+            <div class="bkash-body hidden" id="bkash-step-2">
+                <p class="bkash-body-desc">Enter Verification Code sent to <span id="bkash-phone-display" class="bold">+880 1712345678</span></p>
+                <input type="tel" class="bkash-input-field text-center letter-spacing" id="bkash-otp" placeholder="123456" maxlength="6">
+                <div class="bkash-otp-resend">
+                    Didn't receive code? <span class="bold text-pink pointer" id="otp-timer">30s</span>
+                </div>
+                <div class="bkash-actions">
+                    <button class="btn-bkash bkash-btn-pink" id="bkash-to-pin">PROCEED</button>
+                    <button class="btn-bkash bkash-btn-gray" id="bkash-close-2">CLOSE</button>
+                </div>
+            </div>
+            
+            <!-- bKash Step 3: PIN Entry -->
+            <div class="bkash-body hidden" id="bkash-step-3">
+                <p class="bkash-body-desc">Enter your 5-digit PIN</p>
+                <input type="password" class="bkash-input-field text-center letter-spacing" id="bkash-pin" placeholder="•••••" maxlength="5">
+                <div class="bkash-actions">
+                    <button class="btn-bkash bkash-btn-pink" id="bkash-confirm">CONFIRM</button>
+                    <button class="btn-bkash bkash-btn-gray" id="bkash-close-3">CLOSE</button>
+                </div>
+            </div>
+
+            <!-- bKash Success Overlay -->
+            <div class="bkash-body hidden text-center" id="bkash-step-success">
+                <div class="success-icon">✓</div>
+                <h3 class="bkash-success-title">Payment Successful!</h3>
+                <p class="bkash-success-desc">Thank you for upgrading to Pro Tier.</p>
+                <p class="bkash-txn">TxnID: <span class="bold">BK629XF12D</span></p>
+                <button class="btn-bkash bkash-btn-done" id="bkash-done">BACK TO DASHBOARD</button>
+            </div>
+            
+            <div class="bkash-footer">
+                <span>16247</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: AUDIT SELECTOR MODAL -->
+    <div class="modal-overlay" id="modal-audit-select">
+        <div class="modal-container select-modal-container glass-panel">
+            <div class="modal-header">
+                <h3 data-en="Start Your Campaign Audit" data-bn="ক্যাম্পেইন অডিট শুরু করুন">Start Your Campaign Audit</h3>
+                <button class="modal-close" id="btn-close-select-modal">&times;</button>
+            </div>
+            <div class="modal-body select-modal-body">
+                <p class="select-modal-desc" data-en="Select how you want to connect your Meta ad account details to HisabAd." data-bn="আপনার বিজ্ঞাপনের ডেটা হিসাবঅ্যাডের সাথে যুক্ত করার মাধ্যম নির্বাচন করুন।">Select how you want to connect your Meta ad account details to HisabAd.</p>
+                
+                <div class="audit-select-grid">
+                    <!-- Option A: Direct Sync -->
+                    <div class="audit-select-card" id="select-card-sync">
+                        <div class="select-card-icon">⚡</div>
+                        <h4 data-en="Connect My Ad Account" data-bn="মেটা অ্যাকাউন্ট কানেক্ট করুন">Connect My Ad Account</h4>
+                        <p data-en="Connect directly using Meta OAuth login. Best for shop owners running their own ads." data-bn="মেটা আইডি দিয়ে সরাসরি কানেক্ট করুন। যারা নিজেরা বুস্ট করেন তাদের জন্য উপযুক্ত।">Connect directly using Meta OAuth login. Best for shop owners running their own ads.</p>
+                    </div>
+
+                    <!-- Option B: Request Agency Access -->
+                    <div class="audit-select-card" id="select-card-agency">
+                        <div class="select-card-icon">🤝</div>
+                        <h4 data-en="Audit Agency Campaigns" data-bn="এজেন্সি বিজ্ঞপ্তির অডিট">Audit Agency Campaigns</h4>
+                        <p data-en="Use an access request template to get view-only analyst access from your agency." data-bn="এজেন্সির কাছে ভিউ-অনলি পারমিশন চাওয়ার জন্য রিকোয়েস্ট টেমপ্লেট সংগ্রহ করুন।">Use an access request template to get view-only analyst access from your agency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating status alerts for notifications -->
+    <div class="toast" id="app-toast">Copied to clipboard!</div>
+
+    <!-- Main Logic Script -->
+    <script src="app.js?v=3"></script>
+</body>
+</html>
