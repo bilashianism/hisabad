@@ -3,16 +3,18 @@ require('dotenv').config();
 
 // Ensure DATABASE_URL is configured
 if (!process.env.DATABASE_URL) {
-    throw new Error('❌ FATAL: DATABASE_URL environment variable is missing.');
+    console.warn('⚠️ DATABASE_URL environment variable is missing. Database is offline.');
 }
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    // SSL check for cloud databases
-    ssl: process.env.DATABASE_URL.includes('localhost') || process.env.DATABASE_URL.includes('127.0.0.1') 
-        ? false 
-        : { rejectUnauthorized: false }
-});
+const pool = process.env.DATABASE_URL
+    ? new Pool({
+        connectionString: process.env.DATABASE_URL,
+        // SSL check for cloud databases
+        ssl: process.env.DATABASE_URL.includes('localhost') || process.env.DATABASE_URL.includes('127.0.0.1') 
+            ? false 
+            : { rejectUnauthorized: false }
+      })
+    : null;
 
 let isConnected = false;
 
@@ -30,17 +32,21 @@ let memoryDb = {
 };
 
 // Verify connection on startup
-pool.connect((err, client, release) => {
-    if (err) {
-        console.error('❌ DATABASE WARNING: PostgreSQL connection failed. Falling back to In-Memory Simulator.');
-        console.error('Error Details:', err.message);
-    } else {
-        console.log('✅ Connected to PostgreSQL production database.');
-        isConnected = true;
-        release();
-        initDb();
-    }
-});
+if (pool) {
+    pool.connect((err, client, release) => {
+        if (err) {
+            console.error('❌ DATABASE WARNING: PostgreSQL connection failed. Falling back to In-Memory Simulator.');
+            console.error('Error Details:', err.message);
+        } else {
+            console.log('✅ Connected to PostgreSQL production database.');
+            isConnected = true;
+            release();
+            initDb();
+        }
+    });
+} else {
+    console.warn('⚠️ No database connection pool. Running in In-Memory Simulator Mode.');
+}
 
 async function initDb() {
     if (!isConnected) return;
