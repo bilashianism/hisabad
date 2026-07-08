@@ -44,9 +44,10 @@ app.use(express.static(path.join(__dirname, '.')));
 // Debug Environment Variables
 app.get('/api/debug-env', (req, res) => {
     res.json({
-        META_APP_ID: process.env.META_APP_ID || 'undefined',
-        META_APP_SECRET_LENGTH: process.env.META_APP_SECRET ? process.env.META_APP_SECRET.length : 0,
-        META_APP_SECRET_PREFIX: process.env.META_APP_SECRET ? process.env.META_APP_SECRET.substring(0, 4) : 'none'
+        keys: Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET') && !k.includes('PASS') && !k.includes('TOKEN') && !k.includes('URL') && !k.includes('CONN')),
+        META_APP_ID_EXISTS: !!process.env.META_APP_ID,
+        META_APP_ID_TYPE: typeof process.env.META_APP_ID,
+        META_APP_ID_VALUE: process.env.META_APP_ID || 'undefined'
     });
 });
 
