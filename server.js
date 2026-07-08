@@ -45,16 +45,6 @@ app.use(express.static(path.join(__dirname, '.')));
    1. Facebook/Meta OAuth Login Endpoints
    ========================================================================== */
 
-// Debug Environment Variables
-app.get('/api/debug-env', (req, res) => {
-    res.json({
-        keys: Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET') && !k.includes('PASS') && !k.includes('TOKEN') && !k.includes('URL') && !k.includes('CONN')),
-        META_APP_ID_EXISTS: !!getMetaAppId() && getMetaAppId() !== 'mock_app_id',
-        META_APP_ID_TYPE: typeof getMetaAppId(),
-        META_APP_ID_VALUE: getMetaAppId()
-    });
-});
-
 // OAuth Redirect URL construction
 app.get('/api/auth/facebook', (req, res) => {
     const redirectUri = `http://localhost:${PORT}/api/auth/facebook/callback`;
