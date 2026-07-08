@@ -18,6 +18,10 @@ REQUIRED_ENV.forEach(name => {
 const db = require('./db');
 const metaApi = require('./utils/metaApi');
 const pdfGenerator = require('./utils/pdfGenerator');
+
+// Smart Environment Variable Resolution Helpers
+const getMetaAppId = () => process.env.META_APP_ID || process.env.mock_meta_app_id || 'mock_app_id';
+const getMetaAppSecret = () => process.env.META_APP_SECRET || process.env.mock_meta_app_secret || 'mock_app_secret';
 const bkash = require('./utils/bkash');
 
 const app = express();
@@ -45,16 +49,16 @@ app.use(express.static(path.join(__dirname, '.')));
 app.get('/api/debug-env', (req, res) => {
     res.json({
         keys: Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET') && !k.includes('PASS') && !k.includes('TOKEN') && !k.includes('URL') && !k.includes('CONN')),
-        META_APP_ID_EXISTS: !!process.env.META_APP_ID,
-        META_APP_ID_TYPE: typeof process.env.META_APP_ID,
-        META_APP_ID_VALUE: process.env.META_APP_ID || 'undefined'
+        META_APP_ID_EXISTS: !!getMetaAppId() && getMetaAppId() !== 'mock_app_id',
+        META_APP_ID_TYPE: typeof getMetaAppId(),
+        META_APP_ID_VALUE: getMetaAppId()
     });
 });
 
 // OAuth Redirect URL construction
 app.get('/api/auth/facebook', (req, res) => {
     const redirectUri = `http://localhost:${PORT}/api/auth/facebook/callback`;
-    const appId = process.env.META_APP_ID || 'mock_app_id';
+    const appId = getMetaAppId();
     
     // Official Facebook Login redirect
     const authUrl = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=ads_read,email`;
@@ -85,14 +89,14 @@ app.get('/api/auth/facebook/callback', async (req, res) => {
 
     try {
         // Exchange code for Access Token if using real App IDs
-        if (process.env.META_APP_ID && !process.env.META_APP_ID.startsWith('mock_')) {
+        if (getMetaAppId() && !getMetaAppId().startsWith('mock_')) {
             const redirectUri = `http://localhost:${PORT}/api/auth/facebook/callback`;
             const tokenUrl = `https://graph.facebook.com/v19.0/oauth/access_token`;
             
             const tokenRes = await axios.get(tokenUrl, {
                 params: {
-                    client_id: process.env.META_APP_ID,
-                    client_secret: process.env.META_APP_SECRET,
+                    client_id: getMetaAppId(),
+                    client_secret: getMetaAppSecret(),
                     redirect_uri: redirectUri,
                     code: code
                 }
